@@ -58,14 +58,14 @@ export default {
       authorName: 'author.name',
       authorUsername: 'author.username',
       media: 'photo', // media키를 이용해 이미지도 보여줌
-    },
-    prepare(selection) {
-      const {title, authorName, authorUsername, media} = selection
-      return {
-        title,
-        subtitle: `by ${authorName}(${authorUsername})`,
-        media,
-      }
+      prepare(selection) {
+        const {title, authorName, authorUsername, media} = selection
+        return {
+          title,
+          subtitle: `by ${authorName}(${authorUsername})`,
+          media,
+        }
+      },
     },
   },
 }
