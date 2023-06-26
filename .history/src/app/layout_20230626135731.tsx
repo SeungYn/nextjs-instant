@@ -1,4 +1,3 @@
-import Navbar from '@/components/Navbar';
 import './globals.css';
 import { Open_Sans } from 'next/font/google';
 const openSans = Open_Sans({ subsets: ['latin'] });
@@ -16,10 +15,7 @@ export default function RootLayout({
   return (
     <html lang='ko' className={openSans.className}>
       <body>
-        <div>
-          <Navbar />
-          {children}
-        </div>
+        <div>{children}</div>
       </body>
     </html>
   );

@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <nav className='p-8 flex justify-between items-center'>
       <h1 className='text-4xl font-bold'>Instrantgram</h1>
-      <ul className='flex gap-4 items-center'>
+      <ul className='flex gap-4'>
         <li>
           <Link href={'/'}>
             {pathname !== '/' ? (
@@ -40,11 +40,8 @@ export default function Navbar() {
               <BsPlusSquareFill className='text-4xl' />
             )}
           </Link>
-        </li>
-        <li className='p-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded'>
-          <button className='bg-white p-1'>Sign In </button>
-        </li>
-      </ul>
+				</li>
+				<button>Sign In </button>
     </nav>
   );
 }

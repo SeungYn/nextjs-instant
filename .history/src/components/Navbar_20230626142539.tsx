@@ -42,7 +42,7 @@ export default function Navbar() {
           </Link>
         </li>
         <li className='p-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded'>
-          <button className='bg-white p-1'>Sign In </button>
+          <button className='bg-white'>Sign In </button>
         </li>
       </ul>
     </nav>
