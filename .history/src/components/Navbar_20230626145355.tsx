@@ -12,8 +12,8 @@ import {
 
 const menu = [
   { href: '/', icon: <HomeIcon />, checkedIcon: <HomeFillIcon /> },
-  { href: '/search', icon: <SearchIcon />, checkedIcon: <SearchFillIcon /> },
-  { href: '/post', icon: <PlusIcon />, checkedIcon: <PlusFillIcon /> },
+  { href: '/', icon: <SearchIcon />, checkedIcon: <SearchFillIcon /> },
+  { href: '/', icon: <PlusIcon />, checkedIcon: <PlusFillIcon /> },
 ];
 
 export default function Navbar() {
@@ -22,16 +22,13 @@ export default function Navbar() {
     <nav className='p-8 flex justify-between items-center'>
       <h1 className='text-4xl font-bold'>Instrantgram</h1>
       <ul className='flex gap-4 items-center'>
-        {menu.map((item) => {
-          console.log(item);
-          return (
-            <li key={item.href}>
-              <Link href={item.href}>
-                {pathname !== item.href ? item.icon : item.checkedIcon}
-              </Link>
-            </li>
-          );
-        })}
+        {menu.map((item) => (
+          <li key={item.href}>
+            <Link href={item.href}>
+              {pathname !== item.href ? item.icon : item.checkedIcon}
+            </Link>
+          </li>
+        ))}
 
         <li className='p-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded'>
           <button className='bg-white p-1'>Sign In </button>
