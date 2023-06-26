@@ -5,7 +5,6 @@ import { getServerSession } from 'next-auth';
 import { getProviders, signIn } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 
-// nextjs는 아래처럼 params만 아니라 searchParams도 받아올 수 있음
 type Props = {
   searchParams: {
     callbackUrl: string;

@@ -36,31 +36,23 @@ export default function Navbar() {
             </li>
           );
         })}
-        {user && (
-          <li>
-            <Link href={`/user/${user.username}`}>
-              <Avatar image={user.image} />
-            </Link>
-          </li>
+        {user && <Avatar image={user.image} />}
+        {session ? (
+          <ColorButton
+            text='Sign Out'
+            onClick={() => {
+              signOut();
+            }}
+          />
+        ) : (
+          <ColorButton
+            text='Sign In'
+            onClick={() => {
+              signIn();
+              //router.push('/auth/signin');
+            }}
+          />
         )}
-        <li>
-          {session ? (
-            <ColorButton
-              text='Sign Out'
-              onClick={() => {
-                signOut();
-              }}
-            />
-          ) : (
-            <ColorButton
-              text='Sign In'
-              onClick={() => {
-                signIn();
-                //router.push('/auth/signin');
-              }}
-            />
-          )}
-        </li>
       </ul>
     </nav>
   );

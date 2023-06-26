@@ -38,29 +38,25 @@ export default function Navbar() {
         })}
         {user && (
           <li>
-            <Link href={`/user/${user.username}`}>
-              <Avatar image={user.image} />
-            </Link>
+            <Avatar image={user.image} />
           </li>
         )}
-        <li>
-          {session ? (
-            <ColorButton
-              text='Sign Out'
-              onClick={() => {
-                signOut();
-              }}
-            />
-          ) : (
-            <ColorButton
-              text='Sign In'
-              onClick={() => {
-                signIn();
-                //router.push('/auth/signin');
-              }}
-            />
-          )}
-        </li>
+        {session ? (
+          <ColorButton
+            text='Sign Out'
+            onClick={() => {
+              signOut();
+            }}
+          />
+        ) : (
+          <ColorButton
+            text='Sign In'
+            onClick={() => {
+              signIn();
+              //router.push('/auth/signin');
+            }}
+          />
+        )}
       </ul>
     </nav>
   );

@@ -8,14 +8,14 @@ type Props = {
 };
 
 export default function Signin({ providers, callbackUrl }: Props) {
-  console.log(callbackUrl);
+  console.log(providers);
   return (
     <>
       {Object.values(providers).map((provider) => (
         <ColorButton
           key={provider.id}
           text={`Sign in with ${provider.name}`}
-          onClick={() => signIn(provider.id, { callbackUrl })}
+          onClick={() => signIn(provider.id)}
           size='big'
         />
       ))}

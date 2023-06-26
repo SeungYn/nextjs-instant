@@ -43,24 +43,22 @@ export default function Navbar() {
             </Link>
           </li>
         )}
-        <li>
-          {session ? (
-            <ColorButton
-              text='Sign Out'
-              onClick={() => {
-                signOut();
-              }}
-            />
-          ) : (
-            <ColorButton
-              text='Sign In'
-              onClick={() => {
-                signIn();
-                //router.push('/auth/signin');
-              }}
-            />
-          )}
-        </li>
+        {session ? (
+          <ColorButton
+            text='Sign Out'
+            onClick={() => {
+              signOut();
+            }}
+          />
+        ) : (
+          <ColorButton
+            text='Sign In'
+            onClick={() => {
+              signIn();
+              //router.push('/auth/signin');
+            }}
+          />
+        )}
       </ul>
     </nav>
   );

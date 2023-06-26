@@ -6,20 +6,20 @@ import { RiSearchLine } from 'react-icons/ri';
 import { RiSearchFill } from 'react-icons/ri';
 
 export function HomeIcon() {
-  return <AiOutlineHome className='text-2xl' />;
+  return <AiOutlineHome className='text-sm' />;
 }
 export function HomeFillIcon() {
-  return <AiFillHome className='text-2xl' />;
+  return <AiFillHome className='text-4xl' />;
 }
 export function SearchIcon() {
-  return <RiSearchLine className='text-2xl' />;
+  return <RiSearchLine className='text-4xl' />;
 }
 export function SearchFillIcon() {
-  return <RiSearchFill className='text-2xl' />;
+  return <RiSearchFill className='text-4xl' />;
 }
 export function PlusIcon() {
-  return <BsPlusSquare className='text-2xl' />;
+  return <BsPlusSquare className='text-4xl' />;
 }
 export function PlusFillIcon() {
-  return <BsPlusSquareFill className='text-2xl' />;
+  return <BsPlusSquareFill className='text-4xl' />;
 }
