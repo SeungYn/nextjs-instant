@@ -21,12 +21,13 @@ const menu = [
 export default function Navbar() {
   const pathname = usePathname();
   const { data: session } = useSession();
-  console.log(session);
+  console.log(sessiong);
   return (
     <nav className='p-4 flex justify-between items-center'>
       <h1 className='text-3xl font-bold'>Instrantgram</h1>
       <ul className='flex gap-4 items-center'>
         {menu.map((item) => {
+          console.log(item);
           return (
             <li key={item.href}>
               <Link href={item.href}>
@@ -36,21 +37,7 @@ export default function Navbar() {
           );
         })}
 
-        {session ? (
-          <ColorButton
-            text='Sign Out'
-            onClick={() => {
-              signOut();
-            }}
-          />
-        ) : (
-          <ColorButton
-            text='Sign In'
-            onClick={() => {
-              signIn();
-            }}
-          />
-        )}
+        <ColorButton text='Sign In' onClick={() => {}} />
       </ul>
     </nav>
   );

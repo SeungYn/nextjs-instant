@@ -36,21 +36,7 @@ export default function Navbar() {
           );
         })}
 
-        {session ? (
-          <ColorButton
-            text='Sign Out'
-            onClick={() => {
-              signOut();
-            }}
-          />
-        ) : (
-          <ColorButton
-            text='Sign In'
-            onClick={() => {
-              signIn();
-            }}
-          />
-        )}
+        <ColorButton text='Sign In' onClick={() => {}} />
       </ul>
     </nav>
   );

@@ -27,6 +27,7 @@ export default function Navbar() {
       <h1 className='text-3xl font-bold'>Instrantgram</h1>
       <ul className='flex gap-4 items-center'>
         {menu.map((item) => {
+          console.log(item);
           return (
             <li key={item.href}>
               <Link href={item.href}>
@@ -36,21 +37,7 @@ export default function Navbar() {
           );
         })}
 
-        {session ? (
-          <ColorButton
-            text='Sign Out'
-            onClick={() => {
-              signOut();
-            }}
-          />
-        ) : (
-          <ColorButton
-            text='Sign In'
-            onClick={() => {
-              signIn();
-            }}
-          />
-        )}
+        <ColorButton text='Sign In' onClick={() => {}} />
       </ul>
     </nav>
   );
