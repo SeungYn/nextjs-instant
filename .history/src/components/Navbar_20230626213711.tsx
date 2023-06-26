@@ -47,8 +47,7 @@ export default function Navbar() {
           <ColorButton
             text='Sign In'
             onClick={() => {
-              signIn();
-              //router.push('/auth/signin');
+              router.push('/auth/signin');
             }}
           />
         )}

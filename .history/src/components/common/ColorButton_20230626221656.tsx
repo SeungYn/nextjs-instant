@@ -1,7 +1,7 @@
 type Props = {
   text: string;
   onClick: () => void;
-  size?: 'small' | 'big';
+  size: 'small' | 'big';
 };
 
 export default function ColorButton({ text, onClick, size = 'small' }: Props) {
@@ -12,9 +12,7 @@ export default function ColorButton({ text, onClick, size = 'small' }: Props) {
       }`}
     >
       <button
-        className={`bg-white  hover:opacity-90 transition-opacity ${
-          size === 'big' ? 'p-4 text-2xl' : 'p-[0.3rem]  text-base'
-        }`}
+        className='bg-white p-1 text-base hover:opacity-90 transition-opacity'
         onClick={onClick}
       >
         {text}{' '}
