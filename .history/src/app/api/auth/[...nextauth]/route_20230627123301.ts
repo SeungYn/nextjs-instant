@@ -13,7 +13,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ user: { id, name, email, image } }) {
       // signIn이 session보다 먼저 호출 됨
-      //console.log(id, name, email, image, 'signin callback');
+      console.log(id, name, email, image, 'signin callback');
       if (!email) return false;
 
       addUser({

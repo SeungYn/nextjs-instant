@@ -21,9 +21,5 @@ export default async function page({ searchParams: { callbackUrl } }: Props) {
 
   const providers = (await getProviders()) ?? {};
 
-  return (
-    <section className='flex justify-center'>
-      <Signin providers={providers} callbackUrl={callbackUrl ?? '/'} />
-    </section>
-  );
+  return <section className='flex justify-center'></section>;
 }
