@@ -1,4 +1,3 @@
-import { addUser } from '@/service/user';
 import NextAuth, { AuthOptions, NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 export const authOptions: NextAuthOptions = {
@@ -11,29 +10,14 @@ export const authOptions: NextAuthOptions = {
     // ...add more providers here
   ],
   callbacks: {
-    async signIn({ user: { id, name, email, image } }) {
-      // signIn이 session보다 먼저 호출 됨
-      console.log(id, name, email, image, 'signin callback');
-      if (!email) return false;
-
-      addUser({
-        id,
-        name: name || '',
-        image,
-        email,
-        username: email.split('@')[0],
-      });
-
-      return true;
-    },
     async session({ session }) {
       // Send properties to the client, like an access_token and user id from a provider.
-      //console.log(session, 'session callback');
+      console.log(session, 'session callback');
       const user = session?.user;
       if (user) {
         session.user = {
           ...user,
-          username: user.email?.split('@')[0] || '',
+          username: user.email?.split('@')[0],
         };
       }
       return session;
