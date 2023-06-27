@@ -19,7 +19,7 @@ export default function Avatar({
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        className={`rounded-full  w-full h-full ${border ? 'p-[0.1rem]' : ''}`}
+        className='rounded-full p-[0.1rem] w-full h-full'
         src={image ?? undefined}
         alt='user profile'
       />
