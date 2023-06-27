@@ -5,5 +5,5 @@ export const instance = axios.create({
 });
 
 instance.interceptors.response.use((response: AxiosResponse) => {
-  return response.data;
+  return;
 });

@@ -23,7 +23,7 @@ export default function RootLayout({
             <header className='sticky top-0 border-b z-20'>
               <Navbar />
             </header>
-            <main className='flex justify-center bg-neutral-50 min-h-full'>
+            <main className='flex justify-center bg-neutral-50'>
               {children}
             </main>
           </ReactQueryContext>

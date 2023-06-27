@@ -14,8 +14,8 @@ export default async function Home() {
   console.log(user);
 
   return (
-    <section className='w-full flex flex-col md:flex-row max-w-[850px] p-4 '>
-      <div className='basis-3/4 min-w-0'>
+    <section className='w-full flex flex-col md:flex-row max-w-[850px] p-4 m-auto'>
+      <div className='basis-3/4'>
         <FollowingBar />
         <PostList />
       </div>

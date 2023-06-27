@@ -22,20 +22,23 @@ export default function FollowingBar() {
         !users || (users.length === 0 && <p>{`You don't have follwing `}</p>)
       )}
       {users && users.length > 0 && (
-        <ScrollableBar>
-          {users.map(({ image, username }) => (
-            <Link
-              key={username}
-              href={`/user/${username}`}
-              className='flex flex-col items-center w-20'
-            >
-              <Avatar image={image} size='small' border />
-              <p className='w-full text-sm text-center text-ellipsis overflow-hidden'>
-                {username}
-              </p>
-            </Link>
-          ))}
-        </ScrollableBar>
+        <ul className='w-full flex gap-2'>
+          <ScrollableBar>
+            {users.map(({ image, username }) => (
+              <li key={username}>
+                <Link
+                  href={`/user/${username}`}
+                  className='flex flex-col items-center w-20'
+                >
+                  <Avatar image={image} size='small' border />
+                  <p className='w-full text-sm text-center text-ellipsis overflow-hidden'>
+                    {username}
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ScrollableBar>
+        </ul>
       )}
     </section>
   );
