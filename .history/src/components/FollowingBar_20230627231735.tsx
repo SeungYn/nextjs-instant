@@ -1,14 +1,12 @@
 'use client';
-import { instance } from '@/service/http';
+
 import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 export default function FollowingBar() {
-  const { data, error } = useQuery({
+  const {} = useQuery({
     queryKey: ['test'],
-    queryFn: () => instance.get('/me'),
+    queryFn: () => axios({ method: 'get', url: '/api/auth' }),
   });
-
-  console.log(data);
-  console.log(error);
   return <div>FollowingBar</div>;
 }
