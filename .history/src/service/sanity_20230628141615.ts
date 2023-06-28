@@ -1,5 +1,5 @@
-import imageUrlBuilder from '@sanity/image-url';
 import { createClient } from '@sanity/client';
+import { imageUrlBuilder } from '@sanity/image-url/lib/types/builder';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 // Import using ESM URL imports in environments that supports it:
 // import {createClient} from 'https://esm.sh/@sanity/client'
@@ -15,5 +15,5 @@ export const client = createClient({
 const builder = imageUrlBuilder(client);
 
 export function urlFor(source: SanityImageSource) {
-  return builder.image(source).width(800).url();
+  return builder.image(source);
 }
