@@ -1,5 +1,5 @@
 import { AiOutlineHome } from 'react-icons/ai';
-import { AiFillHome, AiOutlineHeart } from 'react-icons/ai';
+import { AiFillHome } from 'react-icons/ai';
 import { BsPlusSquare } from 'react-icons/bs';
 import { BsPlusSquareFill } from 'react-icons/bs';
 import { RiSearchLine } from 'react-icons/ri';
@@ -29,7 +29,4 @@ export function SmileIcon() {
 }
 export function BookMarkIcon() {
   return <RiBookmarkLine className='text-2xl' />;
-}
-export function HeartIconIcon() {
-  return <AiOutlineHeart className='text-2xl' />;
 }

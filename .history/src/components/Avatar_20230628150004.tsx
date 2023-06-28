@@ -32,10 +32,10 @@ export default function Avatar({
 function getImageSizeStyle(size: AvatarSize) {
   switch (size) {
     case 'small':
-      return 'w-[34px] h-[34px]';
+      return 'w-[34px] h-[34px] p-[0.1rem]';
     case 'medium':
-      return 'w-[42px] h-[42px] ';
+      return 'w-[42px] h-[42px] p-[0.1rem]';
     case 'big':
-      return 'w-16 h-16 ';
+      return 'w-16 h-16 p-[0.2rem]';
   }
 }

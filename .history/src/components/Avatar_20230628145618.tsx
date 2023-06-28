@@ -1,8 +1,6 @@
-type AvatarSize = 'small' | 'big' | 'medium';
-
 type Props = {
   image?: string | null;
-  size?: AvatarSize;
+  size?: 'small' | 'big' | 'medium';
   border?: boolean;
 };
 // oauth를 사용한 이미지 url은 nextjs image 태그를 사용을 하기가 어려움 내부 도메인을 알아야함
@@ -15,9 +13,9 @@ export default function Avatar({
 }: Props) {
   return (
     <div
-      className={`${getImageSizeStyle(
-        size
-      )} bg-gradient-to-bl from-cyan-500 to-blue-500 rounded-full inline-block  leading-9`}
+      className={`${
+        size === 'small' ? 'w-9 h-9' : 'w-20 h-20'
+      } bg-gradient-to-bl from-cyan-500 to-blue-500 rounded-full inline-block  leading-9`}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -27,15 +25,4 @@ export default function Avatar({
       />
     </div>
   );
-}
-
-function getImageSizeStyle(size: AvatarSize) {
-  switch (size) {
-    case 'small':
-      return 'w-[34px] h-[34px]';
-    case 'medium':
-      return 'w-[42px] h-[42px] ';
-    case 'big':
-      return 'w-16 h-16 ';
-  }
 }

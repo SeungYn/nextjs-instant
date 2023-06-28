@@ -1,9 +1,9 @@
 import { AiOutlineHome } from 'react-icons/ai';
-import { AiFillHome, AiOutlineHeart } from 'react-icons/ai';
+import { AiFillHome } from 'react-icons/ai';
 import { BsPlusSquare } from 'react-icons/bs';
 import { BsPlusSquareFill } from 'react-icons/bs';
 import { RiSearchLine } from 'react-icons/ri';
-import { RiSearchFill, RiBookmarkLine } from 'react-icons/ri';
+import { RiSearchFill } from 'react-icons/ri';
 import { FaRegSmile } from 'react-icons/fa';
 
 export function HomeIcon() {
@@ -26,10 +26,4 @@ export function PlusFillIcon() {
 }
 export function SmileIcon() {
   return <FaRegSmile className='text-2xl' />;
-}
-export function BookMarkIcon() {
-  return <RiBookmarkLine className='text-2xl' />;
-}
-export function HeartIconIcon() {
-  return <AiOutlineHeart className='text-2xl' />;
 }

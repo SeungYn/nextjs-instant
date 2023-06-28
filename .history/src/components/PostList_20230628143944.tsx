@@ -3,7 +3,6 @@ import { SimplePost } from '@/model/post';
 import { instance } from '@/service/http';
 import { useQuery } from '@tanstack/react-query';
 import { GridLoader } from 'react-spinners';
-import PostListCard from './PostListCard';
 
 export default function PostList() {
   const {
@@ -18,16 +17,14 @@ export default function PostList() {
   return (
     <section>
       {isLoading && (
-        <div className='text-center my-32'>
+        <div>
           <GridLoader color='red' />
         </div>
       )}
       {posts && (
         <ul>
           {posts.map((post) => (
-            <li key={post.id} className='mb-3'>
-              <PostListCard post={post} />
-            </li>
+            <li key={post.id}>{post.text}</li>
           ))}
         </ul>
       )}

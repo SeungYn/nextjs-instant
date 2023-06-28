@@ -18,7 +18,7 @@ export default function PostList() {
   return (
     <section>
       {isLoading && (
-        <div className='text-center my-32'>
+        <div>
           <GridLoader color='red' />
         </div>
       )}
