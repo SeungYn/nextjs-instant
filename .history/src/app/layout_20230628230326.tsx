@@ -25,7 +25,7 @@ export default function RootLayout({
                 <Navbar />
               </div>
             </header>
-            <main className='flex justify-center '>{children}</main>
+            <main className='flex justify-center  min-h-full'>{children}</main>
           </ReactQueryContext>
         </AuthContext>
       </body>

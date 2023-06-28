@@ -44,7 +44,7 @@ export default function PostDetail({ post }: Props) {
                     border={commentUsername === username}
                   />
                   <div className='ml-2'>
-                    <span className='font-bold mr-1'>{commentUsername}</span>
+                    <span>{commentUsername}</span>
                     <span>{comment}</span>
                   </div>
                 </li>

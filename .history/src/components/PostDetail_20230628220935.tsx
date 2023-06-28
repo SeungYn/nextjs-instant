@@ -19,32 +19,25 @@ export default function PostDetail({ post }: Props) {
   const comments = data?.comments;
   return (
     <section className='flex w-full h-full'>
-      <div className='relative basis-3/5'>
+      <div className='relative'>
         {/* 높이는 부모에 따라 달라지도록 지정 */}
-        <Image
-          src={image}
-          alt={'photo'}
-          priority
-          fill
-          sizes='650px'
-          className='object-cover'
-        />
+        <Image src={image} alt={'photo'} priority fill sizes='650px' />
       </div>
 
-      <div className='w-full basis-2/5 flex flex-col '>
+      <div>
         <PostUserAvatar userImage={userImage} username={username} />
-        <ul className='border-t border-gray-200 h-full overflow-y-auto p-4 mb-1'>
+        <ul>
           {comments &&
             comments.map(
               ({ image, username: commentUsername, comment }, index) => (
-                <li key={index} className='flex items-center mb-1'>
+                <li key={index}>
                   <Avatar
                     image={image}
                     size='small'
                     border={commentUsername === username}
                   />
-                  <div className='ml-2'>
-                    <span className='font-bold mr-1'>{commentUsername}</span>
+                  <div>
+                    <span>{commentUsername}</span>
                     <span>{comment}</span>
                   </div>
                 </li>

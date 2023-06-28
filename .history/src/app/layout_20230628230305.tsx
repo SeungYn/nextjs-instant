@@ -17,15 +17,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang='ko' className={openSans.className}>
-      <body className='w-full bg-neutral-50'>
+      <body className='w-full   bg-neutral-50'>
         <AuthContext>
           <ReactQueryContext>
             <header className='sticky top-0 border-b z-20'>
-              <div className='max-w-screen-xl mx-auto'>
+              <div className='max-w-screen-xl'>
                 <Navbar />
               </div>
             </header>
-            <main className='flex justify-center '>{children}</main>
+            <main className='flex justify-center  min-h-full'>{children}</main>
           </ReactQueryContext>
         </AuthContext>
       </body>
