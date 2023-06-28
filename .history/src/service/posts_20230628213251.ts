@@ -34,12 +34,12 @@ export async function getPost(id: string) {
     .fetch(
       `
   *[_type=="post" && _id == "${id}"][0]{
-    ...,
+    ...
     "username":author->username,
     "userImage": author->image,
     "image":photo,
     "likes":likes[]-> username,
-    comments[]{comment, "username": author->username, "image": author->image},
+    comment[]{comment, "username": author->username, "image": author->image},
     "id":_id,
     "createdAt":_createdAt
   }`
