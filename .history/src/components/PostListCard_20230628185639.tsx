@@ -43,9 +43,7 @@ export default function PostListCard({ post, priority = false }: Props) {
             onClose={() => {
               setOpenModal(false);
             }}
-          >
-            <p>안녕하세요 저는 모달이에요</p>
-          </PostModal>
+          />
         </ModalPortal>
       )}
     </article>

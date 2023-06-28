@@ -6,7 +6,6 @@ import CommentForm from './CommentForm';
 import ActionBar from './ActionBar';
 import { useState } from 'react';
 import ModalPortal from './common/ModalPortal';
-import PostModal from './PostModal';
 
 type Props = {
   post: SimplePost;
@@ -28,7 +27,6 @@ export default function PostListCard({ post, priority = false }: Props) {
         width={500}
         height={500}
         priority={priority}
-        onClick={() => setOpenModal(true)}
       />
       <ActionBar
         likes={likes}
@@ -39,13 +37,7 @@ export default function PostListCard({ post, priority = false }: Props) {
       <CommentForm />
       {openModal && (
         <ModalPortal>
-          <PostModal
-            onClose={() => {
-              setOpenModal(false);
-            }}
-          >
-            <p>안녕하세요 저는 모달이에요</p>
-          </PostModal>
+          <p>안녕하세요</p>
         </ModalPortal>
       )}
     </article>
