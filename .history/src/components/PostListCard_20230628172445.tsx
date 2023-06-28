@@ -4,13 +4,11 @@ import Image from 'next/image';
 import { BookMarkIcon, HeartIconIcon, SmileIcon } from './icons';
 import { parseDate } from '@/util/date';
 import CommentForm from './CommentForm';
-import ActionBar from './ActionBar';
 
 type Props = {
   post: SimplePost;
-  priority?: boolean;
 };
-export default function PostListCard({ post, priority = false }: Props) {
+export default function PostListCard({ post }: Props) {
   const { username, userImage, image, createdAt, likes, text } = post;
   return (
     <article className='rounded-lg shadow-md border border-gray-200'>
@@ -24,15 +22,25 @@ export default function PostListCard({ post, priority = false }: Props) {
         alt={`photo by ${username}`}
         width={500}
         height={500}
-        priority={priority}
       />
-      <ActionBar
-        likes={likes}
-        username={username}
-        text={text}
-        createdAt={createdAt}
-      />
-      <CommentForm />
+      <div className='flex justify-between my-2 px-4'>
+        <HeartIconIcon />
+        <BookMarkIcon />
+      </div>
+      <div className='px-4 py-1'>
+        <p className='text-sm font-bold mb-2'>
+          {`${likes?.length ?? 0} ${likes?.length > 1 ? 'likes' : 'like'}`}{' '}
+        </p>
+        <p>
+          <span className='font-bold mr-1'>{username}</span>
+          {text}
+        </p>
+
+        <p className='text-xs text-neutral-500 uppercase my-2'>
+          {parseDate(createdAt)}
+        </p>
+        <CommentForm />
+      </div>
     </article>
   );
 }
