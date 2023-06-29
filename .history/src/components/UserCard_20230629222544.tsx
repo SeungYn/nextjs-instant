@@ -10,14 +10,14 @@ export default function UserCard({
   return (
     <Link
       href={`/user/${username}`}
-      className='flex items-center gap-2 p-4 border mb-2 cursor-pointer border-neutral-300 hover:bg-neutral-50'
+      className='flex items-center gap-2 p-4 border mb-2 cursor-pointer'
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={image!} alt='user image' className='w-20 h-20 rounded-full' />
       <div>
         <p className='leading-4 font-bold'>{username}</p>
         <p className='text-slate-400'>{name}</p>
-        <p className='text-slate-400 text-sm'>
+        <p className='text-slate-400'>
           <span className='mr-1'>{followersCount} followers</span>
           <span>{followingCount} following</span>
         </p>

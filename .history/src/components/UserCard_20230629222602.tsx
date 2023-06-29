@@ -10,7 +10,7 @@ export default function UserCard({
   return (
     <Link
       href={`/user/${username}`}
-      className='flex items-center gap-2 p-4 border mb-2 cursor-pointer border-neutral-300 hover:bg-neutral-50'
+      className='flex items-center gap-2 p-4 border mb-2 cursor-pointer'
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={image!} alt='user image' className='w-20 h-20 rounded-full' />

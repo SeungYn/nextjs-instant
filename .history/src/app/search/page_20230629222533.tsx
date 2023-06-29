@@ -16,6 +16,7 @@ export default function Page() {
     enabled: isSendable,
   });
 
+  console.log(data);
   return (
     <section className='w-full max-w-[850px] p-4'>
       <input
