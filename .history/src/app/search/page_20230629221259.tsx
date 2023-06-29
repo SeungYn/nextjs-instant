@@ -12,9 +12,7 @@ export default function Page() {
   const { data, isLoading } = useQuery<SearchUser[]>({
     queryKey: ['search', keyword],
     queryFn: () => instance.get(`/search/${keyword}`),
-    enabled: isSendable,
   });
-
   console.log(data);
   return (
     <section className='w-full max-w-[850px] p-4'>

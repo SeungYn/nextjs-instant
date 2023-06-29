@@ -14,7 +14,6 @@ export default function Page() {
     queryFn: () => instance.get(`/search/${keyword}`),
     enabled: isSendable,
   });
-
   console.log(data);
   return (
     <section className='w-full max-w-[850px] p-4'>
