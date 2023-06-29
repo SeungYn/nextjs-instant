@@ -13,20 +13,17 @@ export default function Page() {
   });
   console.log(data);
   return (
-    <section className='w-full max-w-[850px] p-4'>
+    <section className='bg-slate-400 w-full max-w-[850px] p-4'>
       <input
         type='text'
         placeholder='name'
-        className='w-full border p-2'
+        className='w-full'
         onChange={(e) => setKeyword(e.target.value)}
       />
-      <ul className='p-4'>
+      <ul>
         {data &&
           data.map((item) => (
-            <li
-              key={item.name}
-              className='flex items-center gap-2 p-4 border mb-2 cursor-pointer'
-            >
+            <li key={item.name} className='flex '>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={item.image!}
@@ -34,9 +31,9 @@ export default function Page() {
                 className='w-20 h-20 rounded-full'
               />
               <div>
-                <p className='leading-4 font-bold'>{item.username}</p>
-                <p className='text-slate-400'>{item.name}</p>
-                <p className='text-slate-400'>
+                <p>{item.username}</p>
+                <p>{item.name}</p>
+                <p>
                   <span>
                     {item.followingCount ? item.followingCount : 0} followers
                   </span>

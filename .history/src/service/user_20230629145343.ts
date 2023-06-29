@@ -32,17 +32,8 @@ export async function getUserByUsername(username: string) {
   }`);
 }
 
-export async function getUsersAll() {
-  return client.fetch(`*[_type=="user"]{
-    ...,
-    "id":_id,
-    "followingCount":count(following),
-    "followersCount":count(followers),
-  }`);
-}
-
 export async function getUsersByName(name: string) {
-  return client.fetch(`*[_type=="user" && name == "${name}"]{
+  return client.fetch(`*[_type=="user" && username == "${name}"]{
     ...,
     "id":_id,
     "followingCount":count(following),

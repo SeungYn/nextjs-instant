@@ -32,21 +32,13 @@ export async function getUserByUsername(username: string) {
   }`);
 }
 
-export async function getUsersAll() {
-  return client.fetch(`*[_type=="user"]{
-    ...,
-    "id":_id,
-    "followingCount":count(following),
-    "followersCount":count(followers),
-  }`);
-}
-
 export async function getUsersByName(name: string) {
-  return client.fetch(`*[_type=="user" && name == "${name}"]{
+  return client.fetch(`*[_type=="user" && username == "${name}"]{
     ...,
     "id":_id,
-    "followingCount":count(following),
-    "followersCount":count(followers),
+    following[]->{username, image},
+    followers[]->{username, image},
+    "bookmarks": bookmarks[]->_id,
   }`);
 }
 
@@ -54,7 +46,8 @@ export async function getUsersByUsername(Username: string) {
   return client.fetch(`*[_type=="user" && username == "${Username}"]{
     ...,
     "id":_id,
-    "followingCount":count(following),
-    "followersCount":count(followers),
+    following[]->{username, image},
+    followers[]->{username, image},
+    "bookmarks": bookmarks[]->_id,
   }`);
 }

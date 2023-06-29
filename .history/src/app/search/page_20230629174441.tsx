@@ -25,7 +25,7 @@ export default function Page() {
           data.map((item) => (
             <li
               key={item.name}
-              className='flex items-center gap-2 p-4 border mb-2 cursor-pointer'
+              className='flex items-center gap-2 p-4 border mb-2 '
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img

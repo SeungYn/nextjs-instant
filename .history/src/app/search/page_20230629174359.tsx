@@ -17,7 +17,7 @@ export default function Page() {
       <input
         type='text'
         placeholder='name'
-        className='w-full border p-2'
+        className='w-full'
         onChange={(e) => setKeyword(e.target.value)}
       />
       <ul className='p-4'>
@@ -25,7 +25,7 @@ export default function Page() {
           data.map((item) => (
             <li
               key={item.name}
-              className='flex items-center gap-2 p-4 border mb-2 cursor-pointer'
+              className='flex items-center gap-2 p-4 border mb-2 '
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -36,7 +36,7 @@ export default function Page() {
               <div>
                 <p className='leading-4 font-bold'>{item.username}</p>
                 <p className='text-slate-400'>{item.name}</p>
-                <p className='text-slate-400'>
+                <p>
                   <span>
                     {item.followingCount ? item.followingCount : 0} followers
                   </span>

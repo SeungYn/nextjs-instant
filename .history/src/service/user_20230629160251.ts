@@ -42,7 +42,7 @@ export async function getUsersAll() {
 }
 
 export async function getUsersByName(name: string) {
-  return client.fetch(`*[_type=="user" && name == "${name}"]{
+  return client.fetch(`*[_type=="user" && username == "${name}"]{
     ...,
     "id":_id,
     "followingCount":count(following),
