@@ -11,7 +11,6 @@ export default async function Home() {
   if (!user) {
     redirect('/auth/signin');
   }
-  console.log(user);
 
   return (
     <section className='w-full flex flex-col md:flex-row max-w-[850px] p-4 '>

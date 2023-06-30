@@ -10,7 +10,6 @@ export async function GET(request: Request) {
     return new Response('인증 오류', { status: 401 });
   }
   return getFollowingPostsOf(user.username).then((data) => {
-    console.log('post data', data);
     return NextResponse.json(data);
   });
 }
