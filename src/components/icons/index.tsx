@@ -6,6 +6,7 @@ import { RiSearchLine } from 'react-icons/ri';
 import { RiSearchFill, RiBookmarkLine } from 'react-icons/ri';
 import { FaRegSmile } from 'react-icons/fa';
 import { CgClose } from 'react-icons/cg';
+import { MdGridOn } from 'react-icons/md';
 
 export function HomeIcon() {
   return <AiOutlineHome className='text-2xl' />;
@@ -36,4 +37,7 @@ export function HeartIconIcon() {
 }
 export function CloseIcon() {
   return <CgClose className='w-5 h-5' />;
+}
+export function PostIcon() {
+  return <MdGridOn className='w-3 h-3' />;
 }

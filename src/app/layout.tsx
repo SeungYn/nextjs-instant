@@ -25,9 +25,12 @@ export default function RootLayout({
                 <Navbar />
               </div>
             </header>
-            <main className='w-full flex justify-center '>{children}</main>
+            <main className='w-full flex justify-center max-w-screen-xl mx-auto'>
+              {children}
+            </main>
           </ReactQueryContext>
         </AuthContext>
+        <div id='portal'></div>
       </body>
     </html>
   );

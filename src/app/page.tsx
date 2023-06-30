@@ -24,7 +24,6 @@ export default async function Home() {
       <div className='basis-1/4 ml-8'>
         <SideBar user={user} />
       </div>
-      <div id='portal'></div>
     </section>
   );
 }

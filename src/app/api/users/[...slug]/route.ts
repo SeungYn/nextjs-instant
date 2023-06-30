@@ -19,10 +19,10 @@ export async function GET(_: NextRequest, context: Context) {
     case 'posts':
       posts = await getPostsOf(username);
       break;
-    case 'like':
+    case 'liked':
       posts = await getPostsOf(username);
       break;
-    case 'save':
+    case 'saved':
       posts = await getPostsOf(username);
       break;
   }
