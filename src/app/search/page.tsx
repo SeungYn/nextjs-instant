@@ -5,8 +5,14 @@ import useDebounceText from '@/hooks/useDebounceText';
 import { SearchUser } from '@/model/user';
 import { instance } from '@/service/http';
 import { useQuery } from '@tanstack/react-query';
-import Image from 'next/image';
-import { useState } from 'react';
+import { Metadata } from 'next';
+
+// export const metadata: Metadata = {
+//   title: 'User Search',
+//   description: 'Search users to follow',
+// };
+
+export const dynamic = 'force-dynamic';
 
 export default function Page() {
   const [keyword, setKeyword, isSendable] = useDebounceText({ ms: 3000 });

@@ -1,4 +1,4 @@
-import { getPostsOf } from '@/service/posts';
+import { getLikedPostsOf, getPostsOf, getSavedPostsOf } from '@/service/posts';
 import { NextRequest, NextResponse } from 'next/server';
 
 type Context = {
@@ -20,10 +20,10 @@ export async function GET(_: NextRequest, context: Context) {
       posts = await getPostsOf(username);
       break;
     case 'liked':
-      posts = await getPostsOf(username);
+      posts = await getLikedPostsOf(username);
       break;
     case 'saved':
-      posts = await getPostsOf(username);
+      posts = await getSavedPostsOf(username);
       break;
   }
   return NextResponse.json(posts);

@@ -1,9 +1,15 @@
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Signin from '@/components/Signin';
 import ColorButton from '@/components/common/ColorButton';
+import { Metadata } from 'next';
 import { getServerSession } from 'next-auth';
 import { getProviders, signIn } from 'next-auth/react';
 import { redirect } from 'next/navigation';
+
+export const metadata: Metadata = {
+  title: 'Signin',
+  description: 'Signup or Login to Instantgram',
+};
 
 // nextjs는 아래처럼 params만 아니라 searchParams도 받아올 수 있음
 type Props = {
