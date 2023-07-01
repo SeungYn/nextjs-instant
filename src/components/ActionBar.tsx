@@ -14,7 +14,6 @@ type Props = {
   post: SimplePost;
 };
 export default function ActionBar({ post }: Props) {
-  const queryClient = useQueryClient();
   const { id, likes, username, text, createdAt } = post;
   const { data: session } = useSession();
   const user = session?.user;
@@ -23,7 +22,8 @@ export default function ActionBar({ post }: Props) {
   const { setLike } = usePosts();
   const handleLike = (like: boolean) => {
     if (user) {
-      setLike({ like, post });
+      console.log(user.username);
+      setLike({ like, post, username: user.username });
     }
   };
 

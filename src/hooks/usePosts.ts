@@ -14,7 +14,15 @@ export default function usePosts() {
   });
 
   const { mutate: setLike } = useMutation({
-    mutationFn: ({ like, post }: { like: boolean; post: SimplePost }) =>
+    mutationFn: ({
+      like,
+      post,
+      username,
+    }: {
+      like: boolean;
+      post: SimplePost;
+      username: string;
+    }) =>
       fetch('api/likes', {
         method: 'PUT',
         body: JSON.stringify({
@@ -22,10 +30,28 @@ export default function usePosts() {
           like,
         }),
       }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['post'],
+    onMutate: async ({ like, post, username }) => {
+      console.log('Optimistic Updates', username);
+      const newPost = {
+        ...post,
+        likes: like
+          ? [...post.likes, username]
+          : post.likes.filter((id) => id !== username),
+      };
+
+      queryClient.cancelQueries({ queryKey: ['post'] });
+      const previousPosts = queryClient.getQueryData(['post']);
+      queryClient.setQueryData<SimplePost[]>(['post'], (posts) => {
+        return posts?.map((item) => (item.id === post.id ? newPost : item));
       });
+
+      return { previousPosts };
+    },
+    onError: (err, _, context) => {
+      queryClient.setQueryData(['post'], context?.previousPosts);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['post'] });
     },
   });
 
