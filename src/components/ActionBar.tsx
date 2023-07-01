@@ -1,5 +1,6 @@
 import { parseDate } from '@/util/date';
 import { BookMarkIcon, HeartIconIcon } from './icons';
+import { useState } from 'react';
 
 type Props = {
   likes: string[];
@@ -8,6 +9,9 @@ type Props = {
   createdAt: string;
 };
 export default function ActionBar({ likes, username, text, createdAt }: Props) {
+  const [liked, setLiked] = useState(false);
+  const [bookmarked, setBookmarked] = useState(false);
+
   return (
     <>
       <div className='flex justify-between my-2 px-4'>
