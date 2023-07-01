@@ -69,9 +69,33 @@ export async function getSavedPostsOf(username: string) {
     .then(mapPosts);
 }
 
+// setIfMissing > 해당 키로가진 배열이 존재하지 않으면 새로만듬
+// append 배열에 아이템 추가
+// commit > 해당 아이디의 키를 생성해줘서 커밋을 해야됨
+export async function likePost(postId: string, userId: string) {
+  return client
+    .patch(postId)
+    .setIfMissing({ likes: [] })
+    .append('likes', [
+      {
+        _ref: userId,
+        _type: 'referencd',
+      },
+    ])
+    .commit({ autoGenerateArrayKeys: true });
+}
+
+export async function disLikePost(postId: string, userId: string) {
+  return client
+    .patch(postId)
+    .unset([`likes[_ref=="${userId}"]`])
+    .commit();
+}
+
 function mapPosts(posts: SimplePost[]) {
   return posts.map((post: SimplePost) => ({
     ...post,
+    likes: post.likes ?? [],
     image: urlFor(post.image),
   }));
 }
