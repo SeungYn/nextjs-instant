@@ -8,6 +8,7 @@ import BookmarkFillIcon from './icons/BookmarkFillIcon';
 import { SimplePost } from '@/model/post';
 import { useSession } from 'next-auth/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import usePosts from '@/hooks/usePosts';
 
 type Props = {
   post: SimplePost;
@@ -19,24 +20,11 @@ export default function ActionBar({ post }: Props) {
   const user = session?.user;
   const liked = user ? likes.includes(user.username) : false;
   const [bookmarked, setBookmarked] = useState(false);
-  const { mutate } = useMutation({
-    mutationFn: (like: boolean) => {
-      return handleLike(like);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['post'],
-      });
-    },
-  });
+  const { setLike } = usePosts();
   const handleLike = (like: boolean) => {
-    return fetch('api/likes', {
-      method: 'PUT',
-      body: JSON.stringify({
-        id,
-        like,
-      }),
-    });
+    if (user) {
+      setLike({ like, post });
+    }
   };
 
   return (
@@ -44,7 +32,7 @@ export default function ActionBar({ post }: Props) {
       <div className='flex justify-between my-2 px-4'>
         <ToggleButton
           toggled={liked}
-          onToggle={mutate}
+          onToggle={handleLike}
           onIcon={<HeartFillIcon />}
           offIcon={<HeartIcon />}
         />
