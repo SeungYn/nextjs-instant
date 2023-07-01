@@ -9,7 +9,7 @@ import ScrollableBar from './ScrollableBar';
 
 export default function FollowingBar() {
   const { data, error, isLoading } = useQuery<HomeUser>({
-    queryKey: ['test'],
+    queryKey: ['me'],
     queryFn: () => instance.get('/me'),
   });
   const users = data?.following;

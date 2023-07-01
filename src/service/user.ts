@@ -105,6 +105,7 @@ export async function getUserForProfile(username: string) {
 }
 
 export async function bookmarkPost(userId: string, postId: string) {
+  console.log(userId, postId);
   return client
     .patch(userId)
     .append('bookmarks', [

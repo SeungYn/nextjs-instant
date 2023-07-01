@@ -9,22 +9,23 @@ import { SimplePost } from '@/model/post';
 import { useSession } from 'next-auth/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import usePosts from '@/hooks/usePosts';
+import useMe from '@/hooks/me';
 
 type Props = {
   post: SimplePost;
 };
 export default function ActionBar({ post }: Props) {
   const { id, likes, username, text, createdAt } = post;
-  const { data: session } = useSession();
-  const user = session?.user;
-  const liked = user ? likes.includes(user.username) : false;
-  const [bookmarked, setBookmarked] = useState(false);
+  const { user, setBookmarked } = useMe();
   const { setLike } = usePosts();
+
+  const liked = user ? likes.includes(user.username) : false;
+  const bookmarked = user?.bookmarks.includes(id) ?? false;
   const handleLike = (like: boolean) => {
-    if (user) {
-      console.log(user.username);
-      setLike({ like, post, username: user.username });
-    }
+    user && setLike({ like, post, username: user.username });
+  };
+  const handleBookmark = (bookmark: boolean) => {
+    user && setBookmarked({ postId: id, bookmark });
   };
 
   return (
@@ -38,7 +39,7 @@ export default function ActionBar({ post }: Props) {
         />
         <ToggleButton
           toggled={bookmarked}
-          onToggle={setBookmarked}
+          onToggle={handleBookmark}
           onIcon={<BookmarkFillIcon />}
           offIcon={<BookMarkIcon />}
         />

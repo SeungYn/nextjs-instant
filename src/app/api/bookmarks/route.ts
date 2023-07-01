@@ -17,7 +17,7 @@ export async function PUT(request: NextRequest) {
   }
 
   const reqFn = bookmark ? bookmarkPost : disBookmarkPost;
-  return reqFn(id, user.id)
+  return reqFn(user.id, id)
     .then((res) => NextResponse.json(res))
     .catch((error) => new Response(JSON.stringify(error), { status: 500 }));
 }
