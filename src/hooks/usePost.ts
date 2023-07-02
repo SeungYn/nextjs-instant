@@ -1,4 +1,4 @@
-import { Comment, FullPost, SimplePost } from '@/model/post';
+import { Comment, FullPost } from '@/model/post';
 import { instance } from '@/service/http';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -16,7 +16,7 @@ export default function usePost(postId: string) {
   const { mutate: postComment } = useMutation({
     mutationFn: ({ comment }: { comment: Comment }) => {
       return instance.post('/comments', {
-        comment,
+        comment: comment.comment,
         id: postId,
       });
     },
@@ -28,12 +28,12 @@ export default function usePost(postId: string) {
       };
       await queryClient.cancelQueries({ queryKey: ['post', postId] });
 
-      queryClient.setQueryData<FullPost>(['post', postId], newPost);
+      queryClient.setQueryData<FullPost>(['post', postId], () => newPost);
 
       return { previousPost: post };
     },
     onError: (err, _, context) => {
-      queryClient.setQueryData(['post'], context?.previousPost);
+      queryClient.setQueryData(['post'], () => context?.previousPost);
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['post', postId] });
