@@ -31,7 +31,6 @@ export default function usePosts() {
         }),
       }),
     onMutate: async ({ like, post, username }) => {
-      console.log('Optimistic Updates', username);
       const newPost = {
         ...post,
         likes: like
@@ -39,7 +38,7 @@ export default function usePosts() {
           : post.likes.filter((id) => id !== username),
       };
 
-      queryClient.cancelQueries({ queryKey: ['post'] });
+      await queryClient.cancelQueries({ queryKey: ['post'] });
       const previousPosts = queryClient.getQueryData(['post']);
       queryClient.setQueryData<SimplePost[]>(['post'], (posts) => {
         return posts?.map((item) => (item.id === post.id ? newPost : item));
@@ -55,5 +54,30 @@ export default function usePosts() {
     },
   });
 
-  return { posts, error, isLoading, setLike };
+  const { mutate: postComment } = useMutation({
+    mutationFn: ({ post, comment }: { post: SimplePost; comment: string }) =>
+      instance.post('/comments', {
+        comment,
+        id: post.id,
+      }),
+    onMutate: async ({ post, comment }) => {
+      const newPost = {
+        ...post,
+        comments: post.comments + 1,
+      };
+      await queryClient.cancelQueries({ queryKey: ['post'] });
+      const newPosts = posts?.map((p) => (p.id === post.id ? newPost : p));
+      queryClient.setQueryData<SimplePost[]>(['post'], newPosts);
+
+      return { previousPosts: posts };
+    },
+    onError: (err, _, context) => {
+      queryClient.setQueryData(['post'], context?.previousPosts);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['post'] });
+    },
+  });
+
+  return { posts, error, isLoading, setLike, postComment };
 }

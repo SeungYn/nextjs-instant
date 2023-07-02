@@ -9,14 +9,21 @@ import ModalPortal from './common/ModalPortal';
 import PostModal from './PostModal';
 import PostDetail from './PostDetail';
 import PostUserAvatar from './PostUserAvatar';
+import usePosts from '@/hooks/usePosts';
 
 type Props = {
   post: SimplePost;
   priority?: boolean;
 };
 export default function PostListCard({ post, priority = false }: Props) {
-  const { username, userImage, image, text, comments } = post;
+  const { username, userImage, image, text, comments, id } = post;
   const [openModal, setOpenModal] = useState(false);
+  const { postComment } = usePosts();
+
+  const handlePostComment = (comment: string) => {
+    postComment({ post, comment });
+  };
+
   return (
     <article className='rounded-lg shadow-md border border-gray-200'>
       <PostUserAvatar userImage={userImage} username={username} />
@@ -37,10 +44,15 @@ export default function PostListCard({ post, priority = false }: Props) {
           </p>
         )}
         {comments > 1 && (
-          <button className='font-bold my-2 text-sky-500'>{`View all ${comments} comments`}</button>
+          <button
+            onClick={() => {
+              setOpenModal(true);
+            }}
+            className='font-bold my-2 text-sky-500'
+          >{`View all ${comments} comments`}</button>
         )}
       </ActionBar>
-      <CommentForm />
+      <CommentForm handlePostComment={handlePostComment} />
       {openModal && (
         <ModalPortal>
           <PostModal
