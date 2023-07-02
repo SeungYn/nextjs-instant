@@ -79,7 +79,7 @@ export async function likePost(postId: string, userId: string) {
     .append('likes', [
       {
         _ref: userId,
-        _type: 'referencd',
+        _type: 'reference',
       },
     ])
     .commit({ autoGenerateArrayKeys: true });
@@ -90,6 +90,26 @@ export async function disLikePost(postId: string, userId: string) {
     .patch(postId)
     .unset([`likes[_ref=="${userId}"]`])
     .commit();
+}
+
+export async function addComment(
+  postId: string,
+  userId: string,
+  comment: string
+) {
+  return client
+    .patch(postId)
+    .setIfMissing({ comments: [] })
+    .append('comments', [
+      {
+        comment,
+        author: {
+          _ref: userId,
+          _type: 'reference',
+        },
+      },
+    ])
+    .commit({ autoGenerateArrayKeys: true });
 }
 
 function mapPosts(posts: SimplePost[]) {
