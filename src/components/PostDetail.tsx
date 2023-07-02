@@ -6,17 +6,23 @@ import PostUserAvatar from './PostUserAvatar';
 import ActionBar from './ActionBar';
 import CommentForm from './CommentForm';
 import Avatar from './Avatar';
+import usePosts from '@/hooks/usePosts';
 
 type Props = {
   post: SimplePost;
 };
 export default function PostDetail({ post }: Props) {
-  const { id, userImage, username, image, createdAt, likes } = post;
+  const { id, userImage, username, image, text, createdAt, likes } = post;
   const { data } = useQuery<FullPost>({
     queryKey: ['post', id],
     queryFn: () => instance.get(`/posts/${id}`),
   });
+  const { postComment } = usePosts();
   const comments = data?.comments;
+
+  const handlePostComment = (comment: string) => {
+    postComment({ post, comment });
+  };
   return (
     <section className='flex w-full h-full'>
       <div className='relative basis-3/5'>
@@ -51,8 +57,15 @@ export default function PostDetail({ post }: Props) {
               )
             )}
         </ul>
-        <ActionBar post={post} />
-        <CommentForm />
+        <ActionBar post={post}>
+          {text && (
+            <p>
+              <span className='font-bold mr-1'>{username}</span>
+              {text}
+            </p>
+          )}
+        </ActionBar>
+        <CommentForm handlePostComment={handlePostComment} />
       </div>
     </section>
   );
