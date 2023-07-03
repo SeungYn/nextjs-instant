@@ -1,7 +1,6 @@
 import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { authOptions } from '../auth/[...nextauth]/route';
-import { disLikePost, likePost } from '@/service/posts';
 import { follow, unfollow } from '@/service/user';
 
 export async function PUT(request: NextRequest) {

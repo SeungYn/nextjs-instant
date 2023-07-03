@@ -1,7 +1,8 @@
 import { SimplePost } from '@/model/post';
-import { HomeUser } from '@/model/user';
+import { AuthUser, HomeUser } from '@/model/user';
 import { instance } from '@/service/http';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useCallback } from 'react';
 
 async function updateBookmark(poadId: string, bookmark: boolean) {
   return fetch('api/bookmarks', {
@@ -10,6 +11,13 @@ async function updateBookmark(poadId: string, bookmark: boolean) {
       id: poadId,
       bookmark,
     }),
+  });
+}
+
+async function updateFollow(targetId: string, follow: boolean) {
+  return instance.put('/follow', {
+    id: targetId,
+    follow,
   });
 }
 
@@ -57,5 +65,18 @@ export default function useMe() {
     },
   });
 
-  return { user, error, isLoading, setBookmarked };
+  const { mutate: toggleFollow } = useMutation({
+    mutationFn: ({
+      targetUser,
+      follow,
+    }: {
+      targetUser: AuthUser;
+      follow: boolean;
+    }) => updateFollow(targetUser.id, follow),
+    onSuccess: () => {
+      console.log('follow Seccess');
+      queryClient.invalidateQueries({ queryKey: ['me'] });
+    },
+  });
+  return { user, error, isLoading, setBookmarked, toggleFollow };
 }
