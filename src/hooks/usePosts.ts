@@ -23,7 +23,7 @@ export default function usePosts() {
       post: SimplePost;
       username: string;
     }) =>
-      fetch('api/likes', {
+      fetch('/api/likes', {
         method: 'PUT',
         body: JSON.stringify({
           id: post.id,

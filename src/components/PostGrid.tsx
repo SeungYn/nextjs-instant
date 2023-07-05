@@ -10,7 +10,7 @@ type Props = {
 };
 export default function PostGrid({ username, query }: Props) {
   const { data, isLoading } = useQuery<SimplePost[]>({
-    queryKey: [username, query],
+    queryKey: ['post', username, query],
     queryFn: () => instance.get(`/users/${username}/${query}`),
   });
   return (

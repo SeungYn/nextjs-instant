@@ -18,7 +18,7 @@ export default function PostDetail({ post }: Props) {
   const { post: data, postComment } = usePost(post.id);
   const { user } = useMe();
   const comments = data?.comments;
-
+  console.log(comments);
   const handlePostComment = (comment: string) => {
     user &&
       postComment({
