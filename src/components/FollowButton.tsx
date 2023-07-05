@@ -1,10 +1,10 @@
 'use client';
 import { HomeUser, ProfileUser } from '@/model/user';
-import { instance } from '@/service/http';
-import { useQuery } from '@tanstack/react-query';
 import Button from './common/Button';
-import ToggleButton from './common/ToggleButton';
 import useMe from '@/hooks/me';
+import { useEffect, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
+import { reloadUserPage } from '@/server-actions/user';
 
 type Props = {
   user: ProfileUser;
@@ -16,17 +16,23 @@ type Props = {
  */
 export default function FollowButton({ user }: Props) {
   const { username } = user;
-  const { user: data, toggleFollow } = useMe();
+  const { user: data, toggleFollow, toggleFollowAsync } = useMe();
+  const [isPendding, startTransition] = useTransition();
+  const router = useRouter();
   const showButton = data && data.username !== username;
   const following =
     data && data.following.find((item) => item.username === username);
 
   const text = following ? 'Unfollow' : 'Follow';
 
-  const handleFollow = () => {
-    if (!data) return;
-    toggleFollow({ targetUser: user, follow: !following });
+  const handleFollow = async () => {
+    await toggleFollowAsync({ targetUser: user, follow: !following });
+    startTransition(() => reloadUserPage());
   };
+
+  useEffect(() => {
+    console.log('effect');
+  }, []);
 
   if (!showButton) return <></>;
 

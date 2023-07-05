@@ -65,7 +65,7 @@ export default function useMe() {
     },
   });
 
-  const { mutate: toggleFollow } = useMutation({
+  const { mutate: toggleFollow, mutateAsync: toggleFollowAsync } = useMutation({
     mutationFn: ({
       targetUser,
       follow,
@@ -78,5 +78,12 @@ export default function useMe() {
       queryClient.invalidateQueries({ queryKey: ['me'] });
     },
   });
-  return { user, error, isLoading, setBookmarked, toggleFollow };
+  return {
+    user,
+    error,
+    isLoading,
+    setBookmarked,
+    toggleFollow,
+    toggleFollowAsync,
+  };
 }
