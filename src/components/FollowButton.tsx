@@ -5,6 +5,7 @@ import useMe from '@/hooks/me';
 import { useEffect, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { reloadUserPage } from '@/server-actions/user';
+import { PulseLoader } from 'react-spinners';
 
 type Props = {
   user: ProfileUser;
@@ -16,29 +17,36 @@ type Props = {
  */
 export default function FollowButton({ user }: Props) {
   const { username } = user;
-  const { user: data, toggleFollow, toggleFollowAsync } = useMe();
-  const [isPendding, startTransition] = useTransition();
+  const {
+    user: data,
+    toggleFollow,
+    toggleFollowAsync,
+    isMutatePending,
+  } = useMe();
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const showButton = data && data.username !== username;
   const following =
     data && data.following.find((item) => item.username === username);
 
   const text = following ? 'Unfollow' : 'Follow';
-
+  const isUpdating = isMutatePending || isPending;
   const handleFollow = async () => {
     await toggleFollowAsync({ targetUser: user, follow: !following });
+    //toggleFollow({ targetUser: user, follow: !following });
     startTransition(() => reloadUserPage());
   };
-
-  useEffect(() => {
-    console.log('effect');
-  }, []);
 
   if (!showButton) return <></>;
 
   return (
-    <>
+    <div className='relative'>
+      {isUpdating && (
+        <div className='absolute inset-0 flex justify-center items-center'>
+          <PulseLoader size={6} />
+        </div>
+      )}
       <Button text={text} onClick={handleFollow} red={text === 'Unfollow'} />
-    </>
+    </div>
   );
 }

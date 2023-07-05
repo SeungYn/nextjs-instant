@@ -65,7 +65,11 @@ export default function useMe() {
     },
   });
 
-  const { mutate: toggleFollow, mutateAsync: toggleFollowAsync } = useMutation({
+  const {
+    mutate: toggleFollow,
+    mutateAsync: toggleFollowAsync,
+    isPending: isMutatePending,
+  } = useMutation({
     mutationFn: ({
       targetUser,
       follow,
@@ -82,6 +86,7 @@ export default function useMe() {
     user,
     error,
     isLoading,
+    isMutatePending,
     setBookmarked,
     toggleFollow,
     toggleFollowAsync,
