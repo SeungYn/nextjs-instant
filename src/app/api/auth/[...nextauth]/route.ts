@@ -28,13 +28,16 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       // Send properties to the client, like an access_token and user id from a provider.
       const user = session?.user;
+
       if (user) {
+        console.log('start');
         session.user = {
           ...user,
           username: user.email?.split('@')[0] || '',
           id: token.id as string,
         };
       }
+
       return session;
     },
 

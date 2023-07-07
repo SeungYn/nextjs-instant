@@ -4,7 +4,7 @@ import { BsPlusSquare } from 'react-icons/bs';
 import { BsPlusSquareFill } from 'react-icons/bs';
 import { RiSearchLine } from 'react-icons/ri';
 import { RiSearchFill, RiBookmarkLine } from 'react-icons/ri';
-import { FaRegSmile } from 'react-icons/fa';
+import { FaPhotoVideo, FaRegSmile } from 'react-icons/fa';
 import { CgClose } from 'react-icons/cg';
 import { MdGridOn } from 'react-icons/md';
 
@@ -40,4 +40,8 @@ export function CloseIcon() {
 }
 export function PostIcon() {
   return <MdGridOn className='w-3 h-3' />;
+}
+
+export default function FilesIcon() {
+  return <FaPhotoVideo className='w-20 h-20 text-gray-300' />;
 }
