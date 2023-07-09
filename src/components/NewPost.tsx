@@ -15,7 +15,7 @@ import {
 import Button from './common/Button';
 import Image from 'next/image';
 import { instance } from '@/service/http';
-import { redirect } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 
 type Props = {
   user: AuthUser;
@@ -25,11 +25,12 @@ export default function NewPost({ user: { username, image } }: Props) {
   const [isDragging, setIsDragging] = useState(false);
   const [file, setFile] = useState<File>();
   const textRef = useRef<HTMLTextAreaElement>(null);
+  const router = useRouter();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, files } = e.target;
-
-    if (name === 'input-upload') {
+    console.log(files);
+    if (name === 'img') {
       if (files) setFile(files[0]);
     }
   };
@@ -52,9 +53,7 @@ export default function NewPost({ user: { username, image } }: Props) {
     if (e.type === 'dragenter') {
       e.stopPropagation();
       setIsDragging(true);
-      console.log(e);
     } else if (e.type === 'dragleave') {
-      console.log(e);
       e.stopPropagation();
       setIsDragging(false);
     }
@@ -68,14 +67,17 @@ export default function NewPost({ user: { username, image } }: Props) {
     formData.append('file', file);
     formData.append('text', textRef.current?.value ?? '');
 
-    instance
-      .post('/api/posts', {
-        data: formData,
-        headers: { 'Content-type': 'multipart/form-data' },
-      })
-      .then((res) => {
-        redirect('/');
-      });
+    fetch('/api/posts', { method: 'POST', body: formData });
+    // instance
+    //   .post('/posts', formData, {
+    //     headers: { 'Content-Type': 'multipart/form-data' },
+    //   })
+    //   .then((res) => {
+    //     router.push('/');
+    //   })
+    //   .catch((e) => {
+    //     console.log('error', e);
+    //   });
   };
 
   return (
@@ -83,7 +85,7 @@ export default function NewPost({ user: { username, image } }: Props) {
       <PostUserAvatar userImage={image ?? ''} username={username} />
       <form className='w-full flex flex-col' onSubmit={onSubmit}>
         <input
-          className='hidden'
+          // className='hidden'
           type='file'
           accept='image/*'
           id='input-upload'

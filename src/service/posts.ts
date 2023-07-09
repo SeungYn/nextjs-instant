@@ -1,5 +1,6 @@
 import { SimplePost } from '@/model/post';
-import { client, urlFor } from './sanity';
+import { assetsURL, client, urlFor } from './sanity';
+import { instance } from './http';
 
 const simplePostProjection = `
 ...,
@@ -110,6 +111,51 @@ export async function addComment(
       },
     ])
     .commit({ autoGenerateArrayKeys: true });
+}
+
+export async function createPost(userId: string, text: string, file: Blob) {
+  console.log(assetsURL);
+  await fetch(assetsURL, {
+    method: 'post',
+    body: file,
+    headers: {
+      'Content-Type': file.type,
+      authorization: `Bearer ${process.env.SANITY_SECRET_TOKEN}`,
+    },
+  })
+    .then((res) => {
+      console.log(res);
+      return res.text();
+    })
+    .then((d) => console.log(d));
+  console.log(userId, text, file, 'service code');
+  return fetch(assetsURL, {
+    method: 'post',
+    body: file,
+    headers: {
+      'Content-Type': file.type,
+      authorization: `Bearer ${process.env.SANITY_SECRET_TOKEN}`,
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res, 'res');
+      return client.create(
+        {
+          _type: 'post',
+          author: { _ref: userId },
+          photo: { asset: { _ref: res.document._id } },
+          comments: [
+            {
+              comment: text,
+              author: { _ref: userId, _type: 'reference' },
+            },
+          ],
+          likes: [],
+        },
+        { autoGenerateArrayKeys: true }
+      );
+    });
 }
 
 function mapPosts(posts: SimplePost[]) {
